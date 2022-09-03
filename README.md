@@ -517,7 +517,7 @@ These commands should run even if PHP is in "safe mode", but, please be careful;
 Installing Anon is quick, but you can do this the easy way, or the way of the Jedi :D
 
 ### The easy way
-1. copy this link: `https://github.com/CharlSteynberg/anon#manual-installation`
+1. copy this link: `https://github.com/xacra/anon#manual-installation`
 2. contact your hosting provider and ask them to install it for you, send them the copied link
 
 <br>
@@ -533,7 +533,7 @@ The following is what Anon requires ***at least***
 - Permission: make sure your Apache-user can write inside its own web-root directory.
 
 #### Installation procedure
-1. click <a href="https://raw.githubusercontent.com/CharlSteynberg/anon/master/.anon.dir/Anon/base/deploy.php">here</a> to see Anon's [deploy.php](https://github.com/CharlSteynberg/anon/blob/master/.anon.dir/Anon/base/deploy.php) file in plain text; copy all that by pressing: `Ctrl a` then `Ctrl c` on your keyboard, then create a new file on your local computer and name it e.g: `anonDeploy.php` and paste all that text inside it and save.
+1. click <a href="https://raw.githubusercontent.com/xacra/anon/master/.anon.dir/Anon/base/deploy.php">here</a> to see Anon's [deploy.php](https://github.com/xacra/anon/blob/master/.anon.dir/Anon/base/deploy.php) file in plain text; copy all that by pressing: `Ctrl a` then `Ctrl c` on your keyboard, then create a new file on your local computer and name it e.g: `anonDeploy.php` and paste all that text inside it and save.
 2. copy that `anonDeploy.php` file to the target website's web-root folder, like `public_html` -via any means, e.g. FTP -or if mounted via sshfs then just use the terminal, or your file-browser
 3. visit the target URL in your web-browser e.g: `example.com/anonDeploy.php`
 
@@ -569,7 +569,7 @@ You can hide the Anon-panel any time by just clicking on the screen 4 times .. t
 
 
 ## Documentation
-All the **Help** docs are written in markdown and you can browse them [here](https://github.com/CharlSteynberg/anon/tree/master/.anon.dir) by opening the `docs` folder inside each of those folders listed; here's an [example](https://github.com/CharlSteynberg/anon/blob/master/.anon.dir/Code/docs/back-end/errors.md).
+All the **Help** docs are written in markdown and you can browse them [here](https://github.com/xacra/anon/tree/master/.anon.dir) by opening the `docs` folder inside each of those folders listed; here's an [example](https://github.com/xacra/anon/blob/master/.anon.dir/Code/docs/back-end/errors.md).
 
 These help-docs are not complete (yet) but this Readme -together with the Help should get you up to speed quickly. Anon is built to be simple, yet powerful for developers.
 
