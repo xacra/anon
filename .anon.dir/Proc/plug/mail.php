@@ -102,26 +102,34 @@ namespace Anon;
 
          foreach($ca as $cs)
          {
-             $r=$this->engage($cs,$u,$p,$o); $f=$r->fail;
+             $r=$this->engage($cs,$u,$p,$o); $f=$r->fail; $f=trim(($f?$f:''));
              if($r->link){$this->link=$r->link; path::make("$/Mail/vars/tested/$u",$cs); return $this->link;};
-             if($f&&!$ff){$ff=$f;}; $f=trim(($f?$f:'')); $f=depose($f,'<title>','</title>');
-             if(!isin($f,$fm))
+             if($f && ($f!=='{}'))
              {
-                if(facing('SSE')){Proc::emit('dump',"$uf $f"); wait(550);}; // save debugging hours
-                if((wrapOf($f)==='{}')&&isin($f,'"name":"')&&isin($f,'"line":"'))
-                {$f=decode::jso($f); $f->mesg=($uf.$f->mesg); dbug::spew($f); $this->fail=$f; return;};
-                fail::mail("$uf $f"); return;
+                 $f=depose($f,'<title>','</title>');
+
+                 if((wrapOf($f)==='{}')&&isin($f,'"name":"')&&isin($f,'"line":"')) // cannot recover from this error
+                 {
+                     $f=decode::jso($f); $f->mesg=($uf."\n".$f->mesg); $this->fail=$f;
+                     dbug::spew($f); return knob(["fail"=>$f->mesg]);
+                 };
+
+                 if(!isin($ff,$f)){ $ff.="\n\n$f"; };
+                 if(!isin($f,$fm) && facing('SSE'))
+                 { signal::dump("$uf \n$f"); }; // saves debugging time .. for you dear hacker
              };
-             wait(250);
+             wait(600);
          };
 
-         reset($ca); unset($cs);
+         reset($ca); unset($cs); $f=''; $CTRY = implode("\n", $ca);
+         $CERR = "WARNING :: the following IMAP connection options failed:\n$CTRY";
+         signal::dump("$CERR\n\ntrying all the above again with DISABLE_AUTHENTICATOR");
 
          foreach($ca as $cs)
          {
              $r=$this->engage($cs,$u,$p,$o,1,['DISABLE_AUTHENTICATOR'=>'PLAIN']); $f=$r->fail;
              if($r->link){$this->link=$r->link; return $this->link;};
-             $f=($f?$f:''); if(!isin($f,$fm)){fail("$uf $f"); return;}; wait(250);
+             $f=($f?$f:''); if(!isin($f,$fm)){ $ff.="\n\n$f"; }; wait(600);
          };
 
          if($f&&!$lf){$lf=$f;}; $f=trim("$ff\n$lf"); if($f){$f="\n\n```$f```";};

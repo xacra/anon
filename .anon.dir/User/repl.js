@@ -23,6 +23,7 @@ extend(MAIN)
             },
          },
 
+         ignore:"ENV PWD mumble noprom reprom name vivify pacify",
          target:'exec',
 
          argsOf:function(s, r,b,q)
@@ -39,7 +40,7 @@ extend(MAIN)
             return r;
          },
 
-         denied:['ENV','PWD','mumble','exit','echo','exec','clear','help','noprom','reprom'],
+         denied:['ENV','PWD','mumble','exit','echo','exec','clear','help','noprom','reprom','name','vivify','pacify','passwd'],
 
          cdInfo:function(tp,xp, xl,tl,fl)
          {
@@ -140,7 +141,7 @@ extend(MAIN)
 
       exit:function()
       {
-         if (server.stream){ server.stream.close() }; 
+         if (server.stream){ server.stream.close() };
          window.onbeforeunload=null;
          navigator.sendBeacon('/User/doLogout','1');
 
@@ -171,7 +172,7 @@ extend(MAIN)
          };
 
          k=keys(repl); o=repl.ENV.denied;
-         l=[]; k.forEach((i)=>{if(!isin(o,i)){l.push(i)}});
+         l=[]; k.forEach((i)=>{ if(!isin(repl.ENV.ignore,i) && (!isin(o,i) || userDoes("work"))){ l.push(i) }});
          repl.mumble('You can use any of these commands:'); repl.mumble('  '+l.join(' '));
          repl.mumble('To learn how to use a specific command, use e.g: help login');
       },

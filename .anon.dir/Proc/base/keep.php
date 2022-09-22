@@ -30,10 +30,13 @@ namespace Anon;
          foreach($l as $i)
          {
             if(aged("$h/$d/$i")<=($dbs+2)){continue;}; if($d!=='sesn'){void("$h/$d/$i"); continue;}; // non-session related
-            if($usr==='anonymous'){continue;}; $t=pget("$h/$d/$i/TIME"); $t=($t?($t*1):0); $dif=($tmn-$t);
+            if($usr==='anonymous'){continue;}; // if current user is anonymous
+            $t=pget("$h/$d/$i/TIME"); if (!$t){ $t=info("$h/$d/$i/USER"); $t=$t->ctime; };
+            $t=($t?($t*1):0); $dif=($tmn-$t);
             if(!$t||($dif<$dbs)){continue;}; // still active .. skip
             if($dif>($dbs+2)){void("$h/$d/$i");}; // stale sessions
-            if($i!==$hsh){continue;}; if(!facing('GUI')){kuki($x,null); ekko::head(408,false);};
+            // if($i!==$hsh){continue;};
+            if(!facing('GUI')){kuki($i,null); ekko::head(408,false);};
          };
       };
 

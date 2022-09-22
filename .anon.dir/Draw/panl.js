@@ -327,7 +327,9 @@ extend(Anon)
 
       make:function(o,i,l, a,c,t,x,n,fg,bg,f,od,ra,os,fp,ro,sw,bo,ii)
       {
-         a=Anon.Draw.vars.actv; c=a.vars.canvas; c.find('Transformer').destroy(); c.batchDraw(); t=o.type; delete o.type;
+         a=Anon.Draw.vars.actv; c=a.vars.canvas;
+         let fnd = c.find('Transformer');  if(!!fnd && isFunc(fnd.destroy)){ fnd.destroy(); };
+         c.batchDraw(); t=o.type; delete o.type;
          if(isVoid(o.x)){o.x=20}; if(isVoid(o.y)){o.y=20}; od={w:60,h:30}; ra=(o.radius||o.outerRadius);
          if(o.outerRadius&&!o.innerRadius){o.innerRadius=0}; os={x:0,y:0}; fp=(!!o.fillPatternImage);
          ro=(o.rotation||0); delete o.rotation; if(isNumr(ra)){os.x=ra; os.y=ra; od.w=(ra*2); od.h=(ra*2)}

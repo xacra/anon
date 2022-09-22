@@ -430,7 +430,7 @@ $html=trim(ob_get_clean());
             };
         };
 
-        $ls=["anon",".anon.dir",".git",".anon.php","README.md"];
+        $ls=["anon",".anon.dir",".git",".anon.php","LICENSE","README.md"];
         foreach($ls as $li){if(($li!==__FILE__)&&file_exists("$bp/$li")){bash("rm -rf ./$li");}};
 
         die("NEXT :: step-03 :: cloning the repositories and finishing installation");

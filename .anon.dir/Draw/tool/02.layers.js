@@ -56,7 +56,8 @@ extend(Anon.Draw.tool)
       if(isText(n)){let q=n.split('/').pop(); q=swap(((rstub(q,'.')||[q])[0]),'.','_'); q=swap(q,'-','_'); n=select('#DrawPropLayrMake'); n.value=q};
       let v,b; v=trim(n.value); b=rectOf(n); if(!v){v=this.layrNick()};
       if(!isWord(v)){select('#DrawPropTabr').driver.select('Layers'); n.notify('invalid layer name',NEED,TL,[0,(b.height+6)]); return};
-      v=this.layrNick(v); let inst=Anon.Draw.vars.actv; let face=inst.vars.canvas; face.find('Transformer').destroy();
+      v=this.layrNick(v); let inst=Anon.Draw.vars.actv; let face=inst.vars.canvas;
+      let fnd = face.find('Transformer');  if(!!fnd && isFunc(fnd.destroy)){ fnd.destroy(); };
       let layr=(new Konva.Layer()); layr.nick=v; face.add(layr); face.batchDraw();
       inst.vars.flayer=layr; this.layrAnew(); n.value=''; return layr;
    },
@@ -92,7 +93,9 @@ extend(Anon.Draw.tool)
 
    layrPick:function(gn)
    {
-      let ai,ci,gi; ai=Anon.Draw.vars.actv; ci=ai.vars.canvas; ci.find('Transformer').destroy(); ci.batchDraw();
+      let ai,ci,gi; ai=Anon.Draw.vars.actv; ci=ai.vars.canvas;
+      let fnd = ci.find('Transformer');  if(!!fnd && isFunc(fnd.destroy)){ fnd.destroy(); };
+      ci.batchDraw();
       select('#DrawPropLayrView grid').forEach((n)=>{n.declan('hasFocus'); if(isText(gn)&&(n.info.name==gn)){gn=n}});
       ai.vars.flayer=gn.select('input')[0].layer; gi=gn.info; gn.enclan('hasFocus'); select('#DrawPropLayrName').innerHTML=gi.name;
       select('#DrawPropLayrBtns butn').forEach((b)=>

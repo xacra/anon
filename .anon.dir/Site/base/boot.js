@@ -96,7 +96,7 @@
    {
       // Cookies.set(sesn('HASH'),'...');
 
-      let hr,fg;  hr=location.href;  fg=stub(hr,["?freshGui=","&freshGui="]);
+      let hr,fg;  hr=location.href;  fg=stub(hr,"?freshGui=");
       if(fg)
       {
           hr = (fg[0] + fg[2].slice(32));

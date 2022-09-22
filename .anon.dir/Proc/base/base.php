@@ -888,7 +888,7 @@ namespace Anon;
 
         function __construct($p)
         {
-            $fext=fext($p); $this->meta=knob(["fext"=>$fext]);
+            $fext=fext($p); $this->meta=knob(["path"=>$p, "fext"=>$fext]);
             requires::phpx("imagick"); expect::path($p,[R,F]);
             $this->refs=knob(["png"=>"png32","jpg"=>"jpeg"]);
             $this->meta->imag=(new \Imagick());
@@ -909,8 +909,10 @@ namespace Anon;
 
         function descry($p=null)
         {
-            $img=$this->meta->imag; $r=knob();
-            $r->size=[$img->getImageWidth(),$img->getImageHeight()];
+            $img = $this->meta->imag; $r=knob();
+            $r->path = $this->meta->path;
+            $r->fext = $this->meta->fext;
+            $r->size = [$img->getImageWidth(),$img->getImageHeight()];
             if(isText($p,1)){return $r->$p;};
             return $r;
         }
@@ -941,6 +943,16 @@ namespace Anon;
             else{$this->meta->imag->resizeImage($w,$h);};
 
             return $this->meta->imag->$f();
+        }
+
+
+        function scaled($s)
+        {
+            $d = $this->descry();
+            $w = floor($d->size[0] * $s);
+            $h = floor($d->size[1] * $s);
+
+            return $this->raster($d->fext, $w, $h);
         }
     }
 

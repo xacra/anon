@@ -411,7 +411,7 @@ namespace Anon;
       if(!is_string($k)){return;}; if(strlen($k)!==strlen(trim($k))){return;}; // validate cookie-name
       if($v==='<:(/*\):>'){if(!isset($_COOKIE[$k])){return;}; return $_COOKIE[$k];}; // get
       if(($v==='')||($v===':VOID:')){$v=null;}; $d=envi('HOST'); $d="$d";
-      if($v===null){setcookie($k,$v,-1,$p,$d); unset($_COOKIE[$k]); return;}; // delete
+      if($v===null){setcookie($k,'',-1,$p,$d); unset($_COOKIE[$k]); return;}; // delete
       // expires, path, domain, secure, httponly, samesite
       setrawcookie($k,$v,["expires"=>0,"path"=>$p,"domain"=>$d,"secure"=>true,"httponly"=>false,"samesite"=>"Strict"]); // set
       // setrawcookie($k,$v,0,"$p; SameSite=Strict;",$d,true,false); $_COOKIE[$k]=$v; return true; // set TODO :: for older PHPv < 7.3

@@ -965,7 +965,7 @@
       {
          var e,m,f,l,s,i,n,h,o; event.preventDefault(); event.stopPropagation(); e=event.error;
          f=event.filename; l=event.lineno; if(!e||isText(e)||((e.stack+'').indexOf('\n')<0)){e=(new Error((e+'')))}; n=(e.name||'usage');
-         f=event.filename; l=event.lineno; if(!e||isText(e)||((e.stack+'').indexOf('\n')<0)){e=(new Error((e+'')))}; n=(e.name||'usage');
+         // f=event.filename; l=event.lineno; if(!e||isText(e)||((e.stack+'').indexOf('\n')<0)){e=(new Error((e+'')))}; n=(e.name||'usage');
          m=e.message; if(!f){f=fail.maybe;}; if(!l){l=0;}; s=stak(); h=`https://${HOSTNAME}`; f=ltrim(f,h); f=rtrim(f,'?n=script');
          o={name:n, mesg:m, file:f, line:l, stak:s};
          if(!MAIN.BOOTED){ console.error(`BOOT FAIL !!`); console.error(o);};

@@ -471,7 +471,7 @@
       {
          expect.text(e); self=(this||MAIN); if(!self.events){self.events={}};
          if(isFunc(f)){hash=sha1(f.toString());}else{hash=(!!Listen.jobs[e]?e:self.events[e])};
-         x=Listen.jobs[hash]; if(!x){fail('event hash `'+hash+'` is undefined');return};
+         x=Listen.jobs[hash]; if(!x){console.error('event hash `'+hash+'` is undefined');return};
          if(f===VOID){e=x[0]; f=x[1]}; expect.word(e); expect.func(f); n=('on'+e);
          if(self[n]===f){self[n]=VOID}else{self.removeEventListener(e,f,true);}; delete Listen.jobs[hash];
          if(!self.seized){self.seized={}}; self.seized[e]=1; return true;

@@ -252,6 +252,8 @@ namespace Anon;
 
       static function ignore($h,$a,$i)
       {
+         // $omit = conf("Repo/runIgnor");
+         // if ($omit !== true){ return OK; };
          if(isNuma($i)){foreach($i as $r){$z=self::ignore($h,$a,$r);}; return $z;}; // bulk rules
          expect::repo($h); $h=rshave($h,'/'); $p="$h/.git/info/exclude"; if(!$h){$h='/';}; expect::path($p,[W,F]);
          if(($a!==write)&&($a!==erase)){fail('expecting 2nd arg as either :write: or :erase:');};
@@ -264,6 +266,7 @@ namespace Anon;
              if($a===write){$r.=$q;}else{$r=swap($r,$q,'');}; path::make($p,$r); // finish exclude
          };
          $c=frst($i); $i=lshave($i,'!'); $ig=((($a===write)&&($c!=='!'))?1:0); $l=scan($i); unset($p);
+         set_time_limit(360); // all this may take a while, depending on size/complexity
          foreach($l as $p) // update git tracking
          {
              if(!isee("$h/$p")){continue;};

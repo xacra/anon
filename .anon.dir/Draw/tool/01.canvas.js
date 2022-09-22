@@ -62,7 +62,8 @@ extend(Anon.Draw.tool)
 ({
    zoom:function(ns,fm, sx,sy,bx,nw,nh,os,zs,sb,nv,el)
    {
-      if(!isNumr(ns)){return}; let inst=Anon.Draw.vars.actv; let face=inst.vars.canvas; face.find('Transformer').destroy();
+      if(!isNumr(ns)){return}; let inst=Anon.Draw.vars.actv; let face=inst.vars.canvas;
+      let fnd = face.find('Transformer');  if(!!fnd && isFunc(fnd.destroy)){ fnd.destroy(); };
       zs=face.dime.zoom.scal; os=face.dime.size; sx=os.sclx; sy=os.scly;
       if(fm){sb=((ns/1000)/2); ns=(zs+sb); nv=round(ns*100); el=this.input; el.value=nv; el.select('^ < input')[0].value=nv}; sx*=ns; sy*=ns;
       face.scaleX(sx); face.scaleY(sy); face.batchDraw(); bx=face.getClientRect(); nw=Math.floor(bx.width); nh=Math.floor(bx.height);

@@ -35,6 +35,10 @@ namespace Anon;
           $mpth = "$/User/data/master/mail";
           $mval = simp($v->mail);
 
+          // exec::{'git config --system http.sslVerify false'}('/'); // shush!
+          // exec::{'git config --system user.email "'.$mval.'"'}('/'); // shush!
+          // exec::{"git config --global --add safe.directory ".ROOTPATH}('/'); // shush!
+
           if (!isee($mpth) || (pget($mpth) !== $mval)){ path::make($mpth,$mval); };
           if ( !isRepo('/') ){ requires::path("$/Repo/keep.php"); };
           wait(60);

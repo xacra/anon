@@ -443,6 +443,7 @@ extend(custom.domtag)
          let slf = this; let pth=into.path; let lib=slf.status.mime; levl+=1; let ext = into.mime.split('/')[0];
          let val=into.name; let tpe=into.type; let kds=((tpe=='fold')?into.data:(isin(['plug','dbase','table'],tpe)?[]:VOID));
 
+         if (val === "MyRepo"){ return }; // this is not a hack, just a bad f*ckup .. for now we just hide it
          if (pth.startsWith("//")){ into.path = pth.slice(1);  pth = into.path };
 
          if(tpe=='fold'){delete into.data};
