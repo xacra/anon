@@ -142,7 +142,9 @@ extend(Anon.Draw.tool)
 
    pickNone:function()
    {
-      let ai,ci; ai=Anon.Draw.vars.actv; ci=ai.vars.canvas; ci.find('Transformer').destroy(); ci.batchDraw();
+      let ai,ci; ai=Anon.Draw.vars.actv; ci=ai.vars.canvas;
+      try{ ci.find('Transformer').destroy(); }catch(f){};
+      ci.batchDraw();
       select('#DrawPropFiltWrap').reclan('show:hide');
       delete Anon.Draw.vars.actv.vars.active;
    },
@@ -150,7 +152,9 @@ extend(Anon.Draw.tool)
 
    findColr:function( ai,iv,ci,cp,bx)
    {
-      ai=Anon.Draw.vars.actv; iv=ai.vars; if(!!iv.picr){return}; ci=iv.canvas; ci.find('Transformer').destroy(); ci.batchDraw();
+      ai=Anon.Draw.vars.actv; iv=ai.vars; if(!!iv.picr){return}; ci=iv.canvas;
+      try{ ci.find('Transformer').destroy(); }catch(f){};
+      ci.batchDraw();
       cp=create({div:'.posAbs', style:{display:'none',left:0,top:0,width:24,height:24,zIndex:9999,border:'1px solid #FFF',borderRadius:2}});
       cp.setStyle({boxShadow:'0px 0px 1px #000'}); if(!ai.events){ai.events={}}; select('#anonPanlView').insert(cp); cursor.bind(cp,14,-4);
       bx=rectOf(ai); image2Canvas(ci.toDataURL(),(co,cx)=>
